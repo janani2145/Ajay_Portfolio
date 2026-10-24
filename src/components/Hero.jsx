@@ -167,7 +167,10 @@ export default function Hero() {
               </a>
 
               <a
-                href="#about"
+                href="/images/Resume_Ajay.PDF"
+                download="Ajay_Kumar_Cyber_Security_Engineer_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl bg-red-950/40 hover:bg-red-950/70 text-red-300 border border-red-500/30 font-mono text-xs transition-all cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />

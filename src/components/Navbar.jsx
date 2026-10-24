@@ -210,18 +210,18 @@ export default function Navbar() {
                 Includes detailed history of VAPT, Security Audits, Digital Forensics, Incident Response, SOC Operations at Tevel Cyber Corps, and AI/LLM Security research.
               </p>
             </div>
-
             <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={() => {
-                  alert("Ajay Kumar's official resume document can be attached here by updating the link in the codebase.");
-                  setShowResumeModal(false);
-                }}
+              <a
+                href="/images/Resume_Ajay.PDF"
+                download="Ajay_Kumar_Cyber_Security_Engineer_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setShowResumeModal(false)}
                 className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white font-semibold text-sm hover:brightness-110 shadow-[0_0_20px_rgba(255,30,68,0.4)] cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Download PDF</span>
-              </button>
+              </a>
               <button
                 onClick={() => setShowResumeModal(false)}
                 className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-zinc-300 font-semibold text-sm transition-colors cursor-pointer"
