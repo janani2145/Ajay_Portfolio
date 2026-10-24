@@ -37,6 +37,70 @@ export default function Hero() {
     setTilt({ x: 0, y: 0 });
   };
 
+  // Reusable portrait component for both desktop and mobile layouts
+  const renderPortraitCard = (isMobile = false) => (
+    <div className="relative w-full flex justify-center items-center">
+      {/* Soft ambient crimson glow behind frame */}
+      <div className="absolute w-[280px] sm:w-[360px] lg:w-[440px] h-[360px] sm:h-[440px] lg:h-[540px] rounded-full bg-gradient-to-tr from-red-600/30 via-rose-600/20 to-transparent blur-[80px] lg:blur-[90px] pointer-events-none" />
+
+      {/* Interactive 3D Frame Container */}
+      <div
+        ref={isMobile ? null : cardRef}
+        onMouseMove={isMobile ? undefined : handleMouseMove}
+        onMouseLeave={isMobile ? undefined : handleMouseLeave}
+        style={
+          isMobile
+            ? undefined
+            : {
+                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                transition:
+                  tilt.x === 0 && tilt.y === 0
+                    ? "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)"
+                    : "transform 0.15s ease-out",
+              }
+        }
+        className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[460px] aspect-[4/5] sm:aspect-[3/4] rounded-3xl overflow-hidden glass-panel border border-red-500/40 p-2 sm:p-2.5 shadow-[0_0_50px_rgba(255,30,68,0.25)] animate-subtle-float cursor-default"
+      >
+        {/* High-tech Corner Brackets */}
+        <div className="absolute top-3.5 left-3.5 w-4 h-4 border-t-2 border-l-2 border-red-400 z-20 pointer-events-none" />
+        <div className="absolute top-3.5 right-3.5 w-4 h-4 border-t-2 border-r-2 border-red-400 z-20 pointer-events-none" />
+        <div className="absolute bottom-3.5 left-3.5 w-4 h-4 border-b-2 border-l-2 border-red-400 z-20 pointer-events-none" />
+        <div className="absolute bottom-3.5 right-3.5 w-4 h-4 border-b-2 border-r-2 border-red-400 z-20 pointer-events-none" />
+
+        {/* Status HUD Header Tag */}
+        <div className="absolute top-3.5 sm:top-4 left-1/2 -translate-x-1/2 z-20 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-red-500/30 text-[9px] sm:text-[10px] font-mono text-red-300 flex items-center gap-1.5 shadow-md whitespace-nowrap">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+          <span>SOC ANALYST // VERIFIED IDENTITY</span>
+        </div>
+
+        {/* Crystal Clear Portrait - NO Shadows or Dark Overlays on Top */}
+        <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/40">
+          <Image
+            src="/images/Cybersecurity Analyst1.png"
+            alt="Ajay Kumar - Cyber Security Engineer"
+            fill
+            priority
+            sizes="(max-width: 768px) 90vw, (max-width: 1024px) 400px, 500px"
+            className="object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out"
+          />
+        </div>
+
+        {/* Clear Identity Badge at Bottom */}
+        <div className="absolute bottom-3.5 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/85 backdrop-blur-md border border-red-500/40 shadow-[0_0_20px_rgba(255,30,68,0.4)] flex items-center gap-2 sm:gap-2.5 whitespace-nowrap max-w-[92%] justify-center">
+          <span className="flex h-2 w-2 relative shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+          </span>
+          <span className="text-[11px] sm:text-xs font-bold text-white tracking-wider shrink-0">AJAY KUMAR</span>
+          <span className="text-red-500/60 font-mono">|</span>
+          <span className="text-[9px] sm:text-[10px] font-mono text-red-400 uppercase tracking-widest font-semibold truncate">
+            CYBER SECURITY ENGINEER
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <section className="relative min-h-screen pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden flex flex-col justify-center cyber-grid bg-transparent">
       {/* Background ambient crimson & ruby light blooms */}
@@ -46,7 +110,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Hero Text Column */}
+          {/* Left Hero Text Column (With Mobile Photo Image integrated in order) */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* Cyber Status Badge */}
@@ -70,10 +134,14 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Quote / Summary Statement */}
+            {/* Mobile-Only Portrait Image: Directly under Heading, Above the Quote Box */}
+            <div className="block lg:hidden my-6">
+              {renderPortraitCard(true)}
+            </div>
+
+            {/* Quote / Summary Statement Box (Appears below photo on mobile) */}
             <div className="relative p-5 rounded-2xl glass-panel-red border-l-4 border-l-red-500 text-zinc-200">
               <div className="flex items-start gap-3">
-                <Terminal className="w-5 h-5 text-red-400 shrink-0 mt-1" />
                 <p className="text-sm sm:text-base leading-relaxed text-zinc-300">
                   &ldquo;Cyber Security Engineer with 3+ years of experience in VAPT, Security Audits, Digital Forensics, Incident Response, and Security Operations. Experienced in leading security teams and delivering enterprise Cyber Security engagements, with a strong interest in Offensive Security and AI/LLM Security.&rdquo;
                 </p>
@@ -144,66 +212,9 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Column: Clear, High-Definition Cyber Security Analyst Portrait */}
-          <div className="lg:col-span-5 relative flex flex-col justify-center items-center mt-8 lg:mt-0">
-            
-            {/* Soft ambient crimson glow behind frame */}
-            <div className="absolute w-[360px] sm:w-[440px] h-[480px] sm:h-[540px] rounded-full bg-gradient-to-tr from-red-600/30 via-rose-600/20 to-transparent blur-[90px] pointer-events-none" />
-
-            {/* Interactive 3D Frame Container */}
-            <div
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-                transition:
-                  tilt.x === 0 && tilt.y === 0
-                    ? "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)"
-                    : "transform 0.15s ease-out",
-              }}
-              className="relative w-full max-w-[420px] sm:max-w-[460px] aspect-[4/5] sm:aspect-[3/4] rounded-3xl overflow-hidden glass-panel border border-red-500/40 p-2.5 shadow-[0_0_50px_rgba(255,30,68,0.25)] animate-subtle-float cursor-default"
-            >
-              
-              {/* High-tech Corner Brackets */}
-              <div className="absolute top-3.5 left-3.5 w-4 h-4 border-t-2 border-l-2 border-red-400 z-20 pointer-events-none" />
-              <div className="absolute top-3.5 right-3.5 w-4 h-4 border-t-2 border-r-2 border-red-400 z-20 pointer-events-none" />
-              <div className="absolute bottom-3.5 left-3.5 w-4 h-4 border-b-2 border-l-2 border-red-400 z-20 pointer-events-none" />
-              <div className="absolute bottom-3.5 right-3.5 w-4 h-4 border-b-2 border-r-2 border-red-400 z-20 pointer-events-none" />
-
-              {/* Status HUD Header Tag */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-red-500/30 text-[10px] font-mono text-red-300 flex items-center gap-1.5 shadow-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                <span>SOC ANALYST // VERIFIED IDENTITY</span>
-              </div>
-
-              {/* Crystal Clear Portrait - NO Shadows or Dark Overlays on Top */}
-              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/40">
-                <Image
-                  src="/images/Cybersecurity Analyst1.png"
-                  alt="Ajay Kumar - Cyber Security Engineer"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 500px"
-                  className="object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out"
-                />
-              </div>
-
-              {/* Clear Identity Badge at Bottom */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-2 rounded-full bg-black/85 backdrop-blur-md border border-red-500/40 shadow-[0_0_20px_rgba(255,30,68,0.4)] flex items-center gap-2.5 whitespace-nowrap">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                </span>
-                <span className="text-xs font-bold text-white tracking-wider">AJAY KUMAR</span>
-                <span className="text-red-500/60 font-mono">|</span>
-                <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest font-semibold">
-                  CYBER SECURITY ENGINEER
-                </span>
-              </div>
-
-            </div>
-
+          {/* Right Column: Desktop Portrait (Hidden on Mobile, Displayed on lg and above) */}
+          <div className="hidden lg:flex lg:col-span-5 relative flex-col justify-center items-center mt-8 lg:mt-0">
+            {renderPortraitCard(false)}
           </div>
 
         </div>
