@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Mail,
-  MessageSquare,
-  ExternalLink,
-  ShieldCheck,
-  Terminal,
-  ArrowUpRight,
-} from "lucide-react";
+import { Mail, MessageSquare, ArrowUpRight, Terminal } from "lucide-react";
 
-// Inline SVG components for brand logos
 function LinkedInIcon({ className }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -18,20 +10,11 @@ function LinkedInIcon({ className }) {
   );
 }
 
-function GitHubIcon({ className }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
-    </svg>
-  );
-}
-
 export default function Contact() {
   const CONTACT_LINKS = {
-    email: "mailto:ajay.kumar@example.com",
-    whatsapp: "https://wa.me/919000000000",
-    linkedin: "https://www.linkedin.com/in/ajay-kumar-cyber",
-    github: "https://github.com/ajaykumar-cyber",
+    email: "mailto:security.ajaykumar@gmail.com",
+    whatsapp: "https://wa.me/916379215356",
+    linkedin: "https://in.linkedin.com/in/ajay-kumar-9539b0191",
   };
 
   const CONTACT_METHODS = [
@@ -59,20 +42,10 @@ export default function Contact() {
       id: "linkedin",
       title: "LinkedIn",
       subtitle: "Professional network & career updates",
-      value: "https://in.linkedin.com/in/ajay-kumar-9539b0191",
+      value: "linkedin.com/in/ajay-kumar-9539b0191",
       href: CONTACT_LINKS.linkedin,
       icon: LinkedInIcon,
       actionText: "Connect on LinkedIn",
-      isExternal: true,
-    },
-    {
-      id: "github",
-      title: "GitHub",
-      subtitle: "Security tools, research & code repositories",
-      value: "github.com/ajaykumar-cyber",
-      href: CONTACT_LINKS.github,
-      icon: GitHubIcon,
-      actionText: "View GitHub Profile",
       isExternal: true,
     },
   ];
@@ -104,12 +77,12 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto mb-12 p-4 rounded-2xl glass-panel-red border border-red-500/30 text-center flex items-center justify-center gap-3">
           <Terminal className="w-5 h-5 text-red-400 shrink-0" />
           <span className="text-xs text-zinc-300 font-mono">
-            Direct communication links for Email, WhatsApp, LinkedIn, and GitHub. Click any card to connect immediately.
+            Direct communication links for Email, WhatsApp, and LinkedIn. Click any card to connect immediately.
           </span>
         </div>
 
-        {/* Direct Action Cards Grid (NO forms, NO APIs, 100% direct links) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+        {/* Direct Action Cards Grid (3 Columns) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
           {CONTACT_METHODS.map((method) => {
             const Icon = method.icon;
             return (
@@ -132,19 +105,21 @@ export default function Contact() {
                     <h3 className="text-xl font-bold text-white group-hover:text-red-300 transition-colors">
                       {method.title}
                     </h3>
-                    <p className="text-xs text-zinc-400 mt-1 leading-normal">
+                    <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                       {method.subtitle}
                     </p>
                   </div>
+                </div>
 
+                <div className="pt-4 border-t border-white/5 space-y-2">
                   <div className="p-3 rounded-xl bg-black/60 border border-white/10 text-xs font-mono text-red-300 truncate">
                     {method.value}
                   </div>
-                </div>
-
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                  <span className="text-zinc-400 font-medium">{method.actionText}</span>
-                  <span className="text-red-400 font-bold">&rarr;</span>
+                  
+                  <div className="pt-1 flex items-center justify-between text-xs font-mono text-zinc-400 group-hover:text-white transition-colors">
+                    <span>{method.actionText}</span>
+                    <span className="text-red-400 font-bold">&rarr;</span>
+                  </div>
                 </div>
               </a>
             );
